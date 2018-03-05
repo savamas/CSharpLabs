@@ -6,34 +6,34 @@ namespace Lab_01
 	class PolynomialItem
 	{
 		private int _power, _rootsCount;
-		private double[] factors, roots;
+		private double[] _factors, _roots;
 		public string StrImage;
 
-		public PolynomialItem(int Power, double[] Factors, double[] Roots, int RootsCount)
+		public PolynomialItem(int power, double[] factors, double[] roots, int rootsCount)
 		{
-			_power = Power;
-			factors = Factors;
-			roots = Roots;
-			_rootsCount = RootsCount;
+			_power = power;
+			_factors = factors;
+			_roots = roots;
+			_rootsCount = rootsCount;
 
-			StrImage = $"{(factors[0] < 0 ? " -" : " +")} {Math.Abs(factors[0])}";
+			StrImage = $"{(_factors[0] < 0 ? " -" : " +")} {Math.Abs(_factors[0])}";
 			for (int i = 1; i < _power; i++)
 			{
-				StrImage = $"{(factors[i] < 0 ? " -" : " +")}" +
-					                     $" {Math.Abs(factors[i])} * X^{i}" +
+				StrImage = $"{(_factors[i] < 0 ? " -" : " +")}" +
+					                     $" {Math.Abs(_factors[i])} * X^{i}" +
 										 StrImage;
 			}
-			StrImage = $"{factors[_power]} * X^{_power}" + StrImage;
+			StrImage = $"{_factors[_power]} * X^{_power}" + StrImage;
 			StrImage = StrImage + " = 0; solution: ";
 
-			if (factors.All(x => x == 0)) { StrImage = StrImage + "RATIONAL SET"; }
+			if (_factors.All(x => x == 0)) { StrImage = StrImage + "RATIONAL SET"; }
 			else
 			{
-				if (_rootsCount < 1 || (Factors.Length == 2) & (Factors[0] != 0) & (Factors[1] == 0))
+				if (_rootsCount < 1 || (factors.Length == 2) & (factors[0] != 0) & (factors[1] == 0))
 				  { StrImage = StrImage + "NO ROOTS"; }
 				else for (int i = 0; i < _rootsCount; i++)
 				     {
-				     	StrImage = StrImage + $"X{i + 1} = {roots[i]}; ";
+				     	StrImage = StrImage + $"X{i + 1} = {_roots[i]}; ";
 				     }
 			}
 		}

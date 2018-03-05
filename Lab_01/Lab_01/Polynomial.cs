@@ -30,7 +30,7 @@ namespace Lab_01
 			}//цикл деления отрезка пополам
 		}
 
-		private void StepUp(int level, double[][] A, double[][] B, int[] currentRootsCount)
+		private void StepUp(int level, double[][] A, double[][] B, int[] currentrootsCount)
 		{
 			double major = 0;
 			for (int i = 0; i < level; i++)
@@ -39,9 +39,9 @@ namespace Lab_01
 				if (s > major) major = s;
 			}//формирование major
 			major += 1.0;
-			currentRootsCount[level] = 0;
+			currentrootsCount[level] = 0;
 
-			for (int i = 0; i <= currentRootsCount[level - 1]; i++)
+			for (int i = 0; i <= currentrootsCount[level - 1]; i++)
 			{//очередной интервал монотонности
 			 //signLeft signRight - знаки текущего A-полинома на левой и правой границе интервала монотонности
 				int signLeft, signRight;
@@ -61,8 +61,8 @@ namespace Lab_01
 
 				if (rb == 0)
 				{//маловероятный случай попадания в корень
-					B[level][currentRootsCount[level]] = edgeLeft;
-					currentRootsCount[level]++;
+					B[level][currentrootsCount[level]] = edgeLeft;
+					currentrootsCount[level]++;
 					continue;
 				}//маловероятный случай попадания в корень
 
@@ -70,7 +70,7 @@ namespace Lab_01
 				if (rb > 0) signLeft = 1; else signLeft = -1;
 
 				//формирование правой границы поиска
-				if (i == currentRootsCount[level - 1]) edgeRight = major;
+				if (i == currentrootsCount[level - 1]) edgeRight = major;
 				else edgeRight = B[level - 1][i];
 
 				//значение текущего A-полинома на правой границе
@@ -78,8 +78,8 @@ namespace Lab_01
 
 				if (rb == 0)
 				{//маловероятный случай попадания в корень
-					B[level][currentRootsCount[level]] = edgeRight;
-					currentRootsCount[level]++;
+					B[level][currentrootsCount[level]] = edgeRight;
+					currentrootsCount[level]++;
 					continue;
 				}//маловероятный случай попадания в корень
 
@@ -95,13 +95,13 @@ namespace Lab_01
 				else { edgeNegativ = edgeRight; edgePositiv = edgeLeft; }
 
 				//всё готово для локализации корня методом деления пополам интервала поиска
-				B[level][currentRootsCount[level]] = Dihot(level, edgeNegativ, edgePositiv, A[level]);
-				currentRootsCount[level]++;
+				B[level][currentrootsCount[level]] = Dihot(level, edgeNegativ, edgePositiv, A[level]);
+				currentrootsCount[level]++;
 			}//очередной интервал монотонности
 			return;
 		}
 
-		public void GetRealRoots(int n, double[] ArrOfFactors, ref double[] roots, ref int RootsCount)
+		public void GetRealroots(int n, double[] factors, ref double[] roots, ref int rootsCount)
 		{
 			/*
 			  используются вспомогательные массивы A и B, имеющие следующее содержание
@@ -121,7 +121,7 @@ namespace Lab_01
 			*/
 			double[][] A = new double[n + 1][];
 			double[][] B = new double[n + 1][];
-			int[] currentRootsCount = new int[n + 1];
+			int[] currentrootsCount = new int[n + 1];
 
 			for (int i = 1; i <= n; i++)
 			{
@@ -131,7 +131,7 @@ namespace Lab_01
 
 			//нормировка исходного полинома
 
-			for (int i = 0; i < n; i++) A[n][i] = ArrOfFactors[i] / ArrOfFactors[n];
+			for (int i = 0; i < n; i++) A[n][i] = factors[i] / factors[n];
 
 			//расчёт производных A-полиномов
 
@@ -145,27 +145,27 @@ namespace Lab_01
 
 			//формирование исходного корня последнего производного полинома
 
-			currentRootsCount[1] = 1;
+			currentrootsCount[1] = 1;
 			B[1][0] = -A[1][0];
 
 			//подъём по лестнице производных полиномов
 
-			for (int i = 2; i <= n; i++) StepUp(i, A, B, currentRootsCount);
+			for (int i = 2; i <= n; i++) StepUp(i, A, B, currentrootsCount);
 
 			//формирование результата
 
-			RootsCount = currentRootsCount[n];
-			for (int i = 0; i < RootsCount; i++) roots[i] = B[n][i];
+			rootsCount = currentrootsCount[n];
+			for (int i = 0; i < rootsCount; i++) roots[i] = B[n][i];
 
-			if (ArrOfFactors[0] != 0)
+			if (factors[0] != 0)
 			{
 				roots = roots.Where(x => x != 0).ToArray();
-				RootsCount = roots.Length;
+				rootsCount = roots.Length;
 			}
-			if (RootsCount != 0)
+			if (rootsCount != 0)
 			{
 				roots = roots.Distinct().ToArray();
-				RootsCount = roots.Length;
+				rootsCount = roots.Length;
 			}
 		}
 

@@ -14,28 +14,28 @@ namespace Lab_01
 
 		public OperationState Solve()
 		{
-			int Power, RootsCount = 0;
+			int power, rootsCount = 0;
 			double[] factors, roots;
 
 			Console.Write("Please, input polynomials power: ");
-			string PowerStr = Console.ReadLine();
-			if (!int.TryParse(PowerStr, out Power))
+			string powerStr = Console.ReadLine();
+			if (!int.TryParse(powerStr, out power))
 			{
 				return OperationState.ERROR_INCORRECT_POWER_INPUT;
 			}
-			if (Power < 1)
+			if (power < 1)
 			{
 				return OperationState.ERROR_INCORRECT_POWER_INPUT;
 			}
 
-			factors = new double[Power + 1];
-			roots = new double[Power];
+			factors = new double[power + 1];
+			roots = new double[power];
 
-			for (int i = 0; i <= Power; i++)
+			for (int i = 0; i <= power; i++)
 			{
 				Console.Write($"Please, input factor of X^{i}: ");
-				string FactorStr = Console.ReadLine();
-				if (!double.TryParse(FactorStr, out double res))
+				string factorStr = Console.ReadLine();
+				if (!double.TryParse(factorStr, out double res))
 				{
 					return OperationState.ERROR_INCORRECT_FACTOR_INPUT;
 				}
@@ -43,9 +43,9 @@ namespace Lab_01
 			}
 
 			Polynomial PolynomialService = new Polynomial();
-			PolynomialService.GetRealRoots(Power, factors, ref roots, ref RootsCount);
+			PolynomialService.GetRealroots(power, factors, ref roots, ref rootsCount);
 
-			Solutions.Add(new PolynomialItem(Power, factors, roots, RootsCount));
+			Solutions.Add(new PolynomialItem(power, factors, roots, rootsCount));
 
 			Console.WriteLine("\n" + Solutions[Solutions.Count - 1].StrImage + "\n");
 
@@ -60,8 +60,8 @@ namespace Lab_01
 				return OperationState.FuncClearCompleted;
 			}
 			Console.Write("Please, input index of the solution: ");
-			string IndexStr = Console.ReadLine();
-			if (!int.TryParse(IndexStr, out int res))
+			string indexStr = Console.ReadLine();
+			if (!int.TryParse(indexStr, out int res))
 			{
 				return OperationState.ERROR_INDEX_INPUT;
 			}
