@@ -18,9 +18,9 @@ namespace Lab_01.MyMenu
 
 		public void InitMenuItems(SolutionList Solutions)
 		{
-			AddMenuItem(new MenuItem() { Label = "Solve", Action = Solutions.Solve });
-			AddMenuItem(new MenuItem() { Label = "Find", Action =  Solutions.Find });
-			AddMenuItem(new MenuItem() { Label = "Exit", Action = () => { return OperationState.ExitClearCompleted; } });
+			AddMenuItem(new MenuItem { Label = "Solve", Action = Solutions.Solve });
+			AddMenuItem(new MenuItem { Label = "Find", Action =  Solutions.Find });
+			AddMenuItem(new MenuItem { Label = "Exit", Action = () => { return OperationState.ExitClearCompleted; } });
 		}
 
 		public OperationState Start()
