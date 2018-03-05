@@ -14,10 +14,7 @@ namespace Lab_01.MyMenu
 			menuLabel = MenuLabel;
 		}
 
-		private void AddMenuItem(MenuItem item)
-		{
-			items.Add(item);
-		}
+		private void AddMenuItem(MenuItem item) => items.Add(item);
 
 		public void InitMenuItems(SolutionList Solutions)
 		{
