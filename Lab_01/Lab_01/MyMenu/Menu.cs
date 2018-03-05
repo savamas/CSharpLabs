@@ -19,10 +19,10 @@ namespace Lab_01.MyMenu
 			items.Add(item);
 		}
 
-		public void InitMenuItems(SolutionList obSolutions)
+		public void InitMenuItems(SolutionList Solutions)
 		{
-			AddMenuItem(new MenuItem() { Label = "Solve", Action = obSolutions.Solve });
-			AddMenuItem(new MenuItem() { Label = "Find", Action =  obSolutions.Find });
+			AddMenuItem(new MenuItem() { Label = "Solve", Action = Solutions.Solve });
+			AddMenuItem(new MenuItem() { Label = "Find", Action =  Solutions.Find });
 			AddMenuItem(new MenuItem() { Label = "Exit", Action = () => { return OperationState.ExitClearCompleted; } });
 		}
 

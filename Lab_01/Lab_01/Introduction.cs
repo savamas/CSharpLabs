@@ -5,11 +5,11 @@ namespace Lab_01
 {
 	class Introduction
 	{
-		private const int secondInMilliseconds = 1000;
-		private const int amountOfSeconds = 3;
+		private readonly int secondInMilliseconds = 1000;
+		private readonly int amountOfSeconds = 3;
 
 		private string userName;
-		private string _programTitle;
+		private readonly string _programTitle;
 
 		public Introduction(string programTitle)
 		{
