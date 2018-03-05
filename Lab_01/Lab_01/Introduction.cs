@@ -11,10 +11,7 @@ namespace Lab_01
 		private string userName;
 		private readonly string _programTitle;
 
-		public Introduction(string programTitle)
-		{
-			_programTitle = programTitle;
-		}
+		public Introduction(string programTitle) => _programTitle = programTitle;
 
 		public void Greeting()
 		{

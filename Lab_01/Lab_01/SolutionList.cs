@@ -7,11 +7,8 @@ namespace Lab_01
 	{
 		private List<PolynomialItem> Solutions;
 
-		public SolutionList()
-		{
-			Solutions = new List<PolynomialItem>();
-		}
-
+		public SolutionList() => Solutions = new List<PolynomialItem>();
+		
 		public OperationState Solve()
 		{
 			int power, rootsCount = 0;
