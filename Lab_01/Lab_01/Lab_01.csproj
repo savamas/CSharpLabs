@@ -47,6 +47,7 @@
     <Compile Include="MyMenu\MenuItem.cs" />
     <Compile Include="OperationState.cs" />
     <Compile Include="Polynomial.cs" />
+    <Compile Include="PolynomialImplementation.cs" />
     <Compile Include="PolynomialItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

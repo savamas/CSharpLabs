@@ -56,6 +56,7 @@ namespace Lab_01
 				Console.WriteLine("No solutions found!\n");
 				return OperationState.FuncClearCompleted;
 			}
+
 			Console.Write("Please, input index of the solution: ");
 			string indexStr = Console.ReadLine();
 			if (!int.TryParse(indexStr, out int res))
