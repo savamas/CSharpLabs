@@ -42,19 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Readers\ConsolePolynomialReader.cs" />
     <Compile Include="Introduction.cs" />
+    <Compile Include="MyInterfaces\IPolynomialFormer.cs" />
+    <Compile Include="MyInterfaces\IPolynomialReader.cs" />
     <Compile Include="MyMenu\Menu.cs" />
     <Compile Include="MyMenu\MenuItem.cs" />
-    <Compile Include="OperationState.cs" />
     <Compile Include="Polynomial.cs" />
     <Compile Include="PolynomialImplementation.cs" />
     <Compile Include="PolynomialItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolutionList.cs" />
+    <Compile Include="Readers\NumberReader.cs" />
+    <Compile Include="TxtPolynomialFormer.cs" />
+    <Compile Include="Readers\TxtPolynomialReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

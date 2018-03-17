@@ -73,6 +73,8 @@ namespace Lab_01
 				else edgeRight = B[level - 1][i];
 
 				//значение текущего A-полинома на правой границе
+				rb = 1;
+
 				Polinom(level, edgeRight, A[level], ref rb);
 
 				if (rb == 0)

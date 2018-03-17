@@ -1,14 +1,34 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
+using Lab_01.MyInterfaces;
+using System;
 
 namespace Lab_01
 {
 	partial class Polynomial
 	{
+		public List<PolynomialItem> Solutions { get; set; }
+		public IPolynomialFormer<string> StrFullFormer { get; set; }
+		private static Polynomial service;
+
+		private Polynomial(IPolynomialFormer<string> strFullFormer)
+		{
+			Solutions = new List<PolynomialItem>();
+			StrFullFormer = strFullFormer;
+		}
+
+		public static Polynomial getService(IPolynomialFormer<string> strFullFormer)
+		{
+			if (service == null)
+				service = new Polynomial(strFullFormer);
+			return service;
+		}
+
 		partial void Polinom(int n, double x, double[] k, ref double s);
 		partial void Dihot(int degree, double edgeNegativ, double edgePositiv, double[] kf, ref double x);
 		partial void StepUp(int level, double[][] A, double[][] B, int[] currentrootsCount);
 
-		public void GetRealroots(int n, double[] factors, ref double[] roots, ref int rootsCount)
+		public void GetRealroots(int n, double[] factors, out double[] roots, out int rootsCount)
 		{
 			/*
 			  используются вспомогательные массивы A и B, имеющие следующее содержание
@@ -27,11 +47,13 @@ namespace Lab_01
 			  представленный единственным значимым элементом
 			*/
 
+			roots = new double[n];
+
 			double[][] A = new double[n + 1][];
 			double[][] B = new double[n + 1][];
 			int[] currentrootsCount = new int[n + 1];
 
-			for (int i = 1; i <= n; i++)
+			for (int i = 1; i <= n; ++i)
 			{
 				A[i] = new double[i];
 				B[i] = new double[i];
@@ -58,12 +80,12 @@ namespace Lab_01
 
 			//подъём по лестнице производных полиномов
 
-			for (int i = 2; i <= n; i++) StepUp(i, A, B, currentrootsCount);
+			for (int i = 2; i <= n; ++i) StepUp(i, A, B, currentrootsCount);
 
 			//формирование результата
 
 			rootsCount = currentrootsCount[n];
-			for (int i = 0; i < rootsCount; i++) roots[i] = B[n][i];
+			for (int i = 0; i < rootsCount; ++i) roots[i] = B[n][i];
 
 			if (factors[0] != 0)
 			{

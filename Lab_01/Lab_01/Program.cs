@@ -8,10 +8,10 @@ namespace Lab_01
 		{
 			Introduction Intro = new Introduction("Polynomial solver");
 			Intro.Greeting();
-			SolutionList Solution = new SolutionList();
-			Menu mainMenu = new Menu("Use one of the commands");
-			mainMenu.InitMenuItems(Solution);
-			Intro.Parting(mainMenu.Start());
+			Menu mainMenu = new Menu("Use one of the commands: ");
+			mainMenu.InitMenuItems();
+			mainMenu.Start();
+			Intro.Parting();
 		}
 	}
 }

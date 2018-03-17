@@ -5,8 +5,8 @@ namespace Lab_01
 {
 	class Introduction
 	{
-		private readonly int secondInMilliseconds = 1000;
-		private readonly int amountOfSeconds = 3;
+		private const int secondInMilliseconds = 1000;
+		private const int amountOfSeconds = 3;
 
 		private string userName;
 		private readonly string _programTitle;
@@ -24,13 +24,13 @@ namespace Lab_01
 			Console.Clear();
 		}
 
-		public void Parting(OperationState ErrorState)
+		public void Parting()
 		{
 			Console.Clear();
-			Console.WriteLine($"Program state: {ErrorState}\n\nGoodbuy, {userName}!\n\n" +
+			Console.WriteLine($"Goodbuy, {userName}!\n\n" +
 				               "*****************************************\n\n" +
 				              $"Work Completion in ...\n");
-			for (int i = amountOfSeconds; i > 0; i--)
+			for (int i = amountOfSeconds; i > 0; --i)
 			{
 				Console.WriteLine(i);
 				Thread.Sleep(secondInMilliseconds);
