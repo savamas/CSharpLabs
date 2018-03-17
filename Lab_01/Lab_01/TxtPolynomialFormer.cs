@@ -1,6 +1,7 @@
 ﻿using Lab_01.MyInterfaces;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace Lab_01
 {

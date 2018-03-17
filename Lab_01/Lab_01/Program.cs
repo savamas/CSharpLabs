@@ -8,8 +8,7 @@ namespace Lab_01
 		{
 			Introduction Intro = new Introduction("Polynomial solver");
 			Intro.Greeting();
-			Menu mainMenu = new Menu("Use one of the commands: ");
-			mainMenu.InitMenuItems();
+			Menu mainMenu = new MainMenuInit("Use one of the commands: ");
 			mainMenu.Start();
 			Intro.Parting();
 		}
