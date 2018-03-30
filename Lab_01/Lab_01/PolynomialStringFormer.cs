@@ -1,11 +1,10 @@
 ﻿using Lab_01.MyInterfaces;
 using System;
 using System.Linq;
-using System.Text;
 
 namespace Lab_01
 {
-	class TxtBasePolynomialFormer : IPolynomialFormer<string>
+	public class BaseStringPolynomialFormer : IPolynomialFormer<string>
 	{
 		public virtual string Form(PolynomialItem item)
 		{
@@ -23,7 +22,7 @@ namespace Lab_01
 		}
 	}
 
-	class TxtFullPolynomialFormer : TxtBasePolynomialFormer
+	public class FullStringPolynomialFormer : BaseStringPolynomialFormer
 	{
 		public override string Form(PolynomialItem item)
 		{

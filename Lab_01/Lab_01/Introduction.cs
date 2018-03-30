@@ -3,12 +3,12 @@ using System.Threading;
 
 namespace Lab_01
 {
-	class Introduction
+	public class Introduction
 	{
 		private const int secondInMilliseconds = 1000;
 		private const int amountOfSeconds = 3;
 
-		private string userName;
+		public string UserName { get; private set; }
 		private readonly string _programTitle;
 
 		public Introduction(string programTitle) => _programTitle = programTitle;
@@ -18,16 +18,16 @@ namespace Lab_01
 			Console.ForegroundColor = ConsoleColor.DarkGreen;
 			Console.Title = _programTitle;
 			Console.Write("Please, introduce yourself: ");
-			userName = Console.ReadLine();
-			Console.Write($"Hello, {userName}!\n\nPress any key to start: ");
-			Console.ReadKey();
+			UserName = Console.ReadLine();
+			Console.Write($"Hello, {UserName}!\n\nPress any key to start: ");
+			Console.ReadKey(true);
 			Console.Clear();
 		}
 
 		public void Parting()
 		{
 			Console.Clear();
-			Console.WriteLine($"Goodbuy, {userName}!\n\n" +
+			Console.WriteLine($"Goodbuy, {UserName}!\n\n" +
 				               "*****************************************\n\n" +
 				              $"Work Completion in ...\n");
 			for (int i = amountOfSeconds; i > 0; --i)

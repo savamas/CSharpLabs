@@ -5,16 +5,19 @@ using Lab_01.Readers;
 
 namespace Lab_01.MyMenu
 {
-	class MenuTasks : Menu
+	public class MenuTasks : Menu
 	{
-		private Polynomial service = Polynomial.getService(new TxtFullPolynomialFormer());
+	    protected Polynomial service;
 
-		public MenuTasks(string menuLabel) : base(menuLabel) { }
+		public MenuTasks(string menuLabel, Polynomial service) : base(menuLabel)
+		{
+			this.service = service;
+		}
 
 		protected void Solve()
 		{
 			Console.WriteLine();
-			Menu solveMenu = new SolveMenuInit("Use one of the commands: ");
+			Menu solveMenu = new SolveMenuInit("Use one of the commands: ", service);
 			Console.Clear();
 			solveMenu.Start();
 		}
@@ -35,12 +38,13 @@ namespace Lab_01.MyMenu
 
 			service.Solutions.Add(new PolynomialItem(power, factors, roots, rootsCount));
 
-			Console.WriteLine("\n" + service.StrFullFormer.Form(service.Solutions[service.Solutions.Count - 1]) + "\n");
+			Console.WriteLine("\n" + service.FullStringFormer.Form(service.Solutions[service.Solutions.Count - 1]) + "\n");
 		}
 
 		protected void Find()
 		{
 			int index;
+			IPolynomialReader reader = new ConsolePolynomialReader();
 
 			if (0 == service.Solutions.Count)
 			{
@@ -49,18 +53,18 @@ namespace Lab_01.MyMenu
 			}
 			do
 			{
-				index = NumberReader.ReadInteger("index of the solution");
+				index = reader.ReadInteger("index of the solution");
 				if (index < 1 || index > service.Solutions.Count) Console.WriteLine("No such index found!\n");
 			} while (index < 1 || index > service.Solutions.Count);
 
-			Console.WriteLine("\n" + service.StrFullFormer.Form(service.Solutions[service.Solutions.Count - 1]) + "\n");
+			Console.WriteLine("\n" + service.FullStringFormer.Form(service.Solutions[service.Solutions.Count - 1]) + "\n");
 		}
 
 		protected void Save()
 		{
 			using (TextWriter writer = File.CreateText("Polynomial.txt"))
 			{
-				TxtBasePolynomialFormer _strBaseFormer = new TxtBasePolynomialFormer();
+				BaseStringPolynomialFormer _strBaseFormer = new BaseStringPolynomialFormer();
 				for (int i = 0; i < service.Solutions.Count; ++i)
 					writer.WriteLine(_strBaseFormer.Form(service.Solutions[i]));
 			}
@@ -69,9 +73,9 @@ namespace Lab_01.MyMenu
 		}
 	}
 
-	class MainMenuInit : MenuTasks
+	public class MainMenuInit : MenuTasks
 	{
-		public MainMenuInit(string menuLabel) : base(menuLabel) => Init();
+		public MainMenuInit(string menuLabel, Polynomial service) : base(menuLabel, service) => Init();
 
 		private void Init()
 		{
@@ -82,15 +86,26 @@ namespace Lab_01.MyMenu
 		}	
 	}
 
-	class SolveMenuInit : MenuTasks
+	public class SolveMenuInit : MenuTasks
 	{
-		public SolveMenuInit(string menuLabel) : base(menuLabel) => Init();
+		public SolveMenuInit(string menuLabel, Polynomial service) : base(menuLabel, service) => Init();
 
 		private void Init()
 		{
 			AddMenuItem(new MenuItem { Label = "Read from console", Task = SolveFromCLIAdapter });
 			AddMenuItem(new MenuItem { Label = "Read from txt file by index", Task = SolveFromTXTAdapter });
 			AddMenuItem(new MenuItem { Label = "Back", Task = () => { Console.WriteLine(); } });
+		}
+	}
+
+	public class ServerMenuInit : MenuTasks
+	{
+		public ServerMenuInit(string menuLabel, Polynomial service) : base(menuLabel, service) => Init();
+
+		private void Init()
+		{
+			AddMenuItem(new MenuItem { Label = "Send request to Wolfram|Alfa", Task = SolveFromCLIAdapter });
+			AddMenuItem(new MenuItem { Label = "Exit", Task = () => { Console.WriteLine(); } });
 		}
 	}
 }

@@ -1,27 +1,21 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using Lab_01.MyInterfaces;
-using System;
 
 namespace Lab_01
 {
-	partial class Polynomial
+	public partial class Polynomial
 	{
-		public List<PolynomialItem> Solutions { get; set; }
-		public IPolynomialFormer<string> StrFullFormer { get; set; }
-		private static Polynomial service;
+		public List<PolynomialItem> Solutions { get; private set; }
+		public IPolynomialFormer<string> FullStringFormer { get; private set; }
+		public IPolynomialParser<string> StringParser { get; private set; }
 
-		private Polynomial(IPolynomialFormer<string> strFullFormer)
+		public Polynomial(IPolynomialFormer<string> fullStringFormer,
+			              IPolynomialParser<string> stringParser)
 		{
 			Solutions = new List<PolynomialItem>();
-			StrFullFormer = strFullFormer;
-		}
-
-		public static Polynomial getService(IPolynomialFormer<string> strFullFormer)
-		{
-			if (service == null)
-				service = new Polynomial(strFullFormer);
-			return service;
+			FullStringFormer = fullStringFormer;
+			StringParser = stringParser;
 		}
 
 		partial void Polinom(int n, double x, double[] k, ref double s);
@@ -61,7 +55,7 @@ namespace Lab_01
 
 			//нормировка исходного полинома
 
-			for (int i = 0; i < n; i++) A[n][i] = factors[i] / factors[n];
+			for (int i = 0; i < n; ++i) A[n][i] = factors[i] / factors[n];
 
 			//расчёт производных A-полиномов
 

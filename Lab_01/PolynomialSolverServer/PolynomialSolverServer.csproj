@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4B22238-2559-4C12-9EFE-08EF432E5F1D}</ProjectGuid>
+    <ProjectGuid>{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lab_01</RootNamespace>
-    <AssemblyName>Lab_01</AssemblyName>
+    <RootNamespace>PolynomialSolverServer</RootNamespace>
+    <AssemblyName>PolynomialSolverServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,25 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyMenu\MenuInit.cs" />
-    <Compile Include="Readers\ConsolePolynomialReader.cs" />
-    <Compile Include="Introduction.cs" />
-    <Compile Include="MyInterfaces\IPolynomialFormer.cs" />
-    <Compile Include="MyInterfaces\IPolynomialReader.cs" />
-    <Compile Include="MyMenu\Menu.cs" />
-    <Compile Include="MyMenu\MenuItem.cs" />
-    <Compile Include="Polynomial.cs" />
-    <Compile Include="PolynomialImplementation.cs" />
-    <Compile Include="PolynomialItem.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\NumberReader.cs" />
-    <Compile Include="TxtPolynomialFormer.cs" />
-    <Compile Include="Readers\TxtPolynomialReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lab_01\PolynomialSolver.csproj">
+      <Project>{c4b22238-2559-4c12-9efe-08ef432e5f1d}</Project>
+      <Name>PolynomialSolver</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

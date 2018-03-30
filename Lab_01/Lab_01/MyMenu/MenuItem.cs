@@ -2,7 +2,7 @@
 
 namespace Lab_01.MyMenu
 {
-	class MenuItem
+	public class MenuItem
 	{
 		public string Label;
 		public Action Task;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-
-namespace Lab_01
+﻿namespace Lab_01
 {
-	class PolynomialItem
+	public class PolynomialItem
 	{
 		public int _power { get; private set; }
 		public int _rootsCount { get; private set; }

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_01", "Lab_01\Lab_01.csproj", "{C4B22238-2559-4C12-9EFE-08EF432E5F1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialSolver", "Lab_01\PolynomialSolver.csproj", "{C4B22238-2559-4C12-9EFE-08EF432E5F1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialSolverClient", "PolynomialSolverClient\PolynomialSolverClient.csproj", "{59E2EF82-4F5C-4DDA-8963-DA94E793197A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialSolverServer", "PolynomialSolverServer\PolynomialSolverServer.csproj", "{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C4B22238-2559-4C12-9EFE-08EF432E5F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B22238-2559-4C12-9EFE-08EF432E5F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B22238-2559-4C12-9EFE-08EF432E5F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E2EF82-4F5C-4DDA-8963-DA94E793197A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E2EF82-4F5C-4DDA-8963-DA94E793197A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E2EF82-4F5C-4DDA-8963-DA94E793197A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E2EF82-4F5C-4DDA-8963-DA94E793197A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE5CDC6-C644-4F15-BACD-63E9F4D92A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

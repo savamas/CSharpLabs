@@ -3,29 +3,29 @@ using Lab_01.MyInterfaces;
 
 namespace Lab_01.Readers
 {
-	class ConsolePolynomialReader : IPolynomialReader
+    public class ConsolePolynomialReader : BaseReader
 	{
-		public int ReadPower()
+		public override int ReadPower()
 		{
 			int power;
 
 			do
 			{
-				power = NumberReader.ReadInteger("polynomial power");
+				power = ReadInteger("polynomial power");
 				if (power < 1) WriteLine("Power can't be lower than 1!");
 			} while (power < 1);
 
 			return power;
 		}
 
-		public double[] ReadFactors(int power)
+		public override double[] ReadFactors(int power)
 		{
 			double res;
 			double[] factors = new double[power + 1];
 
 			for (int i = 0; i <= power; ++i)
 			{
-				res = NumberReader.ReadDouble($"factor of X^{i}");
+				res = ReadDouble($"factor of X^{i}");
 				factors[i] = res;
 			}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab_01.MyMenu
 {
-	class Menu
+	public class Menu
 	{
 		private string _menuLabel;
 		protected List<MenuItem> items;

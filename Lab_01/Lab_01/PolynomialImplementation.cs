@@ -2,7 +2,7 @@
 
 namespace Lab_01
 {
-	partial class Polynomial
+	public partial class Polynomial
 	{
 		//полином вида x^n+k[n-1]*x^(n-1)+k[n-2]*x^(n-2)+...+k[1]*x+k[0]
 		//со старшим коэффициентом, равным единице
