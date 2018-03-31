@@ -26,11 +26,10 @@ namespace PolynomialSolverClient
 		{
 			byte[] data = new byte[256];
 			StringBuilder builder = new StringBuilder();
-			int bytes = 0;
 
 			do
 			{
-				bytes = TCPSocket.Receive(data, 0);
+				int bytes = TCPSocket.Receive(data, 0);
 				builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
 			} while (TCPSocket.Available > 0);
 

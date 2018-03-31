@@ -9,49 +9,74 @@ namespace PolynomialSolverServer
 	public class Client
 	{
 		private Socket handler;
-		private Polynomial service;
-		private string clientName; // gonna be extended
+		private string clientName;
+		private bool clientFirstRequest;
+		private ConsoleColor clientColor;
 
 		public Client(Socket handler)
 		{
 			this.handler = handler;
-			service = new Polynomial(new FullStringPolynomialFormer(), new PolynomialStringParser());
+			clientColor = GetARandomColorForClient();
+			clientFirstRequest = true;
+		}
+
+		private string GetRequest()
+		{
+			byte[] data = new byte[256];
+			StringBuilder builder = new StringBuilder();
+			int bytes = 0;
+
+			do
+			{
+				bytes = handler.Receive(data, 0);
+				builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+			} while (handler.Available > 0);
+
+			return builder.ToString();
+		}
+
+		private void SendRespond(string request)
+		{
+			byte[] data = new byte[256];
+			Polynomial service = new Polynomial(new FullStringPolynomialFormer(), new PolynomialStringParser());
+
+			IPolynomialParser<string> parser = new PolynomialStringParser();
+			int power = parser.GetPower(request);
+			double[] factors = parser.GetFactors(request, power);
+
+			service.GetRealroots(power, factors, out double[] roots, out int rootsCount);
+			string message = service.FullStringFormer.Form(new PolynomialItem(power, factors, roots, rootsCount));
+
+			data = Encoding.Unicode.GetBytes(message);
+			handler.Send(data);
 		}
 
 		public void LaunchProcess()
 		{
 			bool processIsLaunched = true;
-			byte[] data = new byte[256];
-			int bytes;
 
 			try
 			{
 				while (processIsLaunched)
 				{
-					StringBuilder builder = new StringBuilder();
-					bytes = 0;
+					string clientRequest = GetRequest();
 
-					do
+					if (String.IsNullOrEmpty(clientRequest)) break;
+
+					if (clientFirstRequest)
 					{
-						bytes = handler.Receive(data, 0);
-						builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-					} while (handler.Available > 0);
+						clientName = clientRequest.Substring(0, clientRequest.IndexOf(':'));
+						Console.ForegroundColor = clientColor;
+						Console.WriteLine("\n" + clientName + " connected\n");
+						clientFirstRequest = false;
+					}
 
-					if (builder.ToString() == "") break;
-					Console.WriteLine(DateTime.Now.ToShortTimeString() + " " + builder.ToString());
+					Console.ForegroundColor = clientColor;
+					Console.WriteLine(DateTime.Now.ToShortTimeString() + " " + clientRequest);
 
-					string tmpString = builder.ToString();
-					tmpString = tmpString.Substring(tmpString.IndexOf(':') + 1).Trim();
+					clientRequest = clientRequest.Substring(clientRequest.IndexOf(':') + 1).Trim();
 
-					IPolynomialParser<string> parser = new PolynomialStringParser();
-					int power = parser.GetPower(tmpString);
-					double[] factors = parser.GetFactors(tmpString, power);
-
-					service.GetRealroots(power, factors, out double[] roots, out int rootsCount);
-					string message = service.FullStringFormer.Form(new PolynomialItem(power, factors, roots, rootsCount));
-
-					data = Encoding.Unicode.GetBytes(message);
-					handler.Send(data);
+					SendRespond(clientRequest);
 				}
 			}
 			catch (Exception ex)
@@ -64,10 +89,19 @@ namespace PolynomialSolverServer
 			}
 		}
 
-		public void Disconnect()
+		private void Disconnect()
 		{
+			Console.ForegroundColor = clientColor;
+			Console.WriteLine(clientName + " disconnected");
 			handler.Shutdown(SocketShutdown.Both);
 			handler.Close();
+		}
+
+		private ConsoleColor GetARandomColorForClient()
+		{
+			Random random = new Random();
+			Array consoleColors = Enum.GetValues(typeof(ConsoleColor));
+			return (ConsoleColor)consoleColors.GetValue(random.Next(consoleColors.Length));
 		}
 	}
 }
