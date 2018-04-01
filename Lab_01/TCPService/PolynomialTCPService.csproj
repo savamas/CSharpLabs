@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59E2EF82-4F5C-4DDA-8963-DA94E793197A}</ProjectGuid>
+    <ProjectGuid>{76F54382-2392-4D40-A660-F666A6EEA59D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PolynomialSolverClient</RootNamespace>
-    <AssemblyName>PolynomialSolverClient</AssemblyName>
+    <RootNamespace>TCPService</RootNamespace>
+    <AssemblyName>TCPService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,11 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCPServices\ClientService.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ClientService.cs" />
+    <Compile Include="ITcpIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TCPServices\ServerService.cs" />
-    <Compile Include="TCPServices\BaseService.cs" />
+    <Compile Include="ServerService.cs" />
+    <Compile Include="TCPService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -57,6 +57,5 @@
       <Name>PolynomialSolver</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

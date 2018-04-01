@@ -1,5 +1,4 @@
 ﻿using static System.Console;
-using Lab_01.MyInterfaces;
 
 namespace Lab_01.Readers
 {

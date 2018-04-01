@@ -1,54 +1,18 @@
 ﻿using System;
-using System.Text;
-using System.Net.Sockets;
-using Lab_01;
-using Lab_01.MyInterfaces;
+using PolynomialSolverClient.TCPServices;
 
 namespace PolynomialSolverServer
 {
 	public class Client
 	{
-		private Socket handler;
+		private BaseService service;
 		private string clientName;
 		private bool clientFirstRequest;
-		private ConsoleColor clientColor;
 
-		public Client(Socket handler)
+		public Client(ServerService service)
 		{
-			this.handler = handler;
-			clientColor = GetARandomColorForClient();
+			this.service = service;
 			clientFirstRequest = true;
-		}
-
-		private string GetRequest()
-		{
-			byte[] data = new byte[256];
-			StringBuilder builder = new StringBuilder();
-			int bytes = 0;
-
-			do
-			{
-				bytes = handler.Receive(data, 0);
-				builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-			} while (handler.Available > 0);
-
-			return builder.ToString();
-		}
-
-		private void SendRespond(string request)
-		{
-			byte[] data = new byte[256];
-			Polynomial service = new Polynomial(new FullStringPolynomialFormer(), new PolynomialStringParser());
-
-			IPolynomialParser<string> parser = new PolynomialStringParser();
-			int power = parser.GetPower(request);
-			double[] factors = parser.GetFactors(request, power);
-
-			service.GetRealroots(power, factors, out double[] roots, out int rootsCount);
-			string message = service.FullStringFormer.Form(new PolynomialItem(power, factors, roots, rootsCount));
-
-			data = Encoding.Unicode.GetBytes(message);
-			handler.Send(data);
 		}
 
 		public void LaunchProcess()
@@ -59,24 +23,22 @@ namespace PolynomialSolverServer
 			{
 				while (processIsLaunched)
 				{
-					string clientRequest = GetRequest();
+					string clientRequest = service.GetData();
 
 					if (String.IsNullOrEmpty(clientRequest)) break;
 
 					if (clientFirstRequest)
 					{
 						clientName = clientRequest.Substring(0, clientRequest.IndexOf(':'));
-						Console.ForegroundColor = clientColor;
 						Console.WriteLine("\n" + clientName + " connected\n");
 						clientFirstRequest = false;
 					}
 
-					Console.ForegroundColor = clientColor;
 					Console.WriteLine(DateTime.Now.ToShortTimeString() + " " + clientRequest);
 
 					clientRequest = clientRequest.Substring(clientRequest.IndexOf(':') + 1).Trim();
 
-					SendRespond(clientRequest);
+					service.SendData(clientRequest);
 				}
 			}
 			catch (Exception ex)
@@ -85,23 +47,9 @@ namespace PolynomialSolverServer
 			}
 			finally
 			{
-				Disconnect();
+				Console.WriteLine("\n" + clientName + " disconnected\n");
+				service.Disconnect();
 			}
-		}
-
-		private void Disconnect()
-		{
-			Console.ForegroundColor = clientColor;
-			Console.WriteLine(clientName + " disconnected");
-			handler.Shutdown(SocketShutdown.Both);
-			handler.Close();
-		}
-
-		private ConsoleColor GetARandomColorForClient()
-		{
-			Random random = new Random();
-			Array consoleColors = Enum.GetValues(typeof(ConsoleColor));
-			return (ConsoleColor)consoleColors.GetValue(random.Next(consoleColors.Length));
 		}
 	}
 }

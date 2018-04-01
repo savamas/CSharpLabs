@@ -2,6 +2,8 @@
 using System.Net.Sockets;
 using System.Threading;
 using System;
+using Lab_01;
+using PolynomialSolverClient.TCPServices;
 
 namespace PolynomialSolverServer
 {
@@ -13,6 +15,8 @@ namespace PolynomialSolverServer
 
 		static void Main(string[] args)
 		{
+			Console.Title = "Polynomial solver (Server)";
+
 			IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(localhost), port);
 			Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -23,7 +27,9 @@ namespace PolynomialSolverServer
 				Console.WriteLine("Server launched, waiting for connections...");
 				while (serverIsLaunched)
 				{
-					Client client = new Client(listenSocket.Accept());
+					Client client = new Client(new ServerService(new Polynomial(new FullStringPolynomialFormer(),
+																				new PolynomialStringParser()),
+																	 listenSocket.Accept()));
 					Thread clientThread = new Thread(new ThreadStart(client.LaunchProcess));
 					clientThread.Start();
 				}

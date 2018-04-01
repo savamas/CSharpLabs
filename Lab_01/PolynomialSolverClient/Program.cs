@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using Lab_01;
 using Lab_01.Readers;
+using PolynomialSolverClient.TCPServices;
 
 namespace PolynomialSolverClient
 {
@@ -11,6 +12,8 @@ namespace PolynomialSolverClient
 		private const int port = 23; //default telnet port
 		private const string remoteHost = "127.0.0.1";
 
+		private static BaseService service;
+
 		static void Main(string[] args)
 		{
 			Introduction Intro = new Introduction("Polynomial solver (Client Application)");
@@ -18,15 +21,15 @@ namespace PolynomialSolverClient
 
 			IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(remoteHost), port);
 
-			ClientService clientService = new ClientService(new Socket(AddressFamily.InterNetwork,
-																	   SocketType.Stream,
-																	   ProtocolType.Tcp));
 			ConsoleKeyInfo keyInfo;
 			bool next = true;
 
 			try
 			{
-				clientService.TCPSocket.Connect(ipPoint);
+				service = new ClientService(new ConsolePolynomialReader(), new Socket(AddressFamily.InterNetwork,
+													  							         SocketType.Stream,
+																	                   ProtocolType.Tcp));
+				service.Handler.Connect(ipPoint);
 
 				do
 				{
@@ -36,9 +39,9 @@ namespace PolynomialSolverClient
 					if (keyInfo.KeyChar == 'q') next = false;
 					else
 					{
-						clientService.SendRequest(new ConsolePolynomialReader(), Intro.UserName);
+						service.SendData(Intro.UserName);
 						Console.WriteLine("\n" + DateTime.Now.ToShortTimeString() + " Server respond: " + 
-							              clientService.GetRespond() + "\n");
+							              service.GetData() + "\n");
 					}
 				} while (next);
 			}
@@ -48,7 +51,7 @@ namespace PolynomialSolverClient
 			}
 			finally
 			{
-				clientService.Disconnect();
+				service.Disconnect();
 				Intro.Parting();
 			}
 		}
