@@ -1,4 +1,4 @@
-﻿namespace Lab_01
+﻿namespace PolynomialLib
 {
 	public class PolynomialItem
 	{

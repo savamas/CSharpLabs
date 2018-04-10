@@ -1,8 +1,8 @@
-﻿using Lab_01.MyInterfaces;
+﻿using PolynomialLib.MyInterfaces;
 using System;
 using System.Linq;
 
-namespace Lab_01
+namespace PolynomialLib
 {
 	public class BaseStringPolynomialFormer : IPolynomialFormer<string>
 	{

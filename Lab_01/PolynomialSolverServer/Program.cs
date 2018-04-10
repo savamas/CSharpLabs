@@ -2,8 +2,8 @@
 using System.Net.Sockets;
 using System.Threading;
 using System;
-using Lab_01;
-using PolynomialSolverClient.TCPServices;
+using PolynomialLib;
+using PolynomialLib.TCPServices;
 
 namespace PolynomialSolverServer
 {
@@ -30,6 +30,8 @@ namespace PolynomialSolverServer
 					Client client = new Client(new ServerService(new Polynomial(new FullStringPolynomialFormer(),
 																				new PolynomialStringParser()),
 																	 listenSocket.Accept()));
+					client.ClientConnected += clientConnected;
+					client.ClientDisconnected += clientDisconnected;
 					Thread clientThread = new Thread(new ThreadStart(client.LaunchProcess));
 					clientThread.Start();
 				}
@@ -44,6 +46,16 @@ namespace PolynomialSolverServer
 			{
 				Console.WriteLine(ex.Message);
 			}
+		}
+
+		private static void clientConnected(string clientName)
+		{
+			Console.WriteLine("\n" + clientName + " connected\n");
+		}
+
+		private static void clientDisconnected(string clientName)
+		{
+			Console.WriteLine("\n" + clientName + " disconnected\n");
 		}
 	}
 }

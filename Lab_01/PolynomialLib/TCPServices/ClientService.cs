@@ -1,8 +1,7 @@
-﻿using Lab_01.MyInterfaces;
-using Lab_01;
+﻿using PolynomialLib.MyInterfaces;
 using System.Net.Sockets;
 
-namespace PolynomialSolverClient.TCPServices
+namespace PolynomialLib.TCPServices
 {
 	public class ClientService : BaseService
 	{

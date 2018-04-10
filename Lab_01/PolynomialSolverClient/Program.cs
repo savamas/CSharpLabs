@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
-using Lab_01;
-using Lab_01.Readers;
-using PolynomialSolverClient.TCPServices;
+using PolynomialSolver;
+using PolynomialLib.MyReaders;
+using PolynomialLib.TCPServices;
 
 namespace PolynomialSolverClient
 {
@@ -23,6 +23,7 @@ namespace PolynomialSolverClient
 
 			ConsoleKeyInfo keyInfo;
 			bool next = true;
+			bool ServerLaunched = true;
 
 			try
 			{
@@ -44,6 +45,17 @@ namespace PolynomialSolverClient
 							              service.GetData() + "\n");
 					}
 				} while (next);
+			}		
+			catch (SocketException ex)
+			{
+				if (ex.SocketErrorCode == SocketError.ConnectionReset)
+					Console.WriteLine("\nConnection lost!\nPress any key to exit");
+				if (ex.SocketErrorCode == SocketError.ConnectionRefused)
+				{
+					Console.WriteLine("\nServer's not launched!\nPress any key to exit");
+					ServerLaunched = false;
+				}
+				Console.ReadKey();
 			}
 			catch (Exception ex)
 			{
@@ -51,7 +63,7 @@ namespace PolynomialSolverClient
 			}
 			finally
 			{
-				service.Disconnect();
+				if (ServerLaunched) service.Disconnect();
 				Intro.Parting();
 			}
 		}

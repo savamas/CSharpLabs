@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
-using Lab_01.MyInterfaces;
-using Lab_01.Readers;
+using PolynomialLib.MyInterfaces;
+using PolynomialLib.MyReaders;
+using PolynomialLib;
 
-namespace Lab_01.MyMenu
+namespace PolynomialSolver.MyMenu
 {
 	public class MenuTasks : Menu
 	{
@@ -95,17 +96,6 @@ namespace Lab_01.MyMenu
 			AddMenuItem(new MenuItem { Label = "Read from console", Task = SolveFromCLIAdapter });
 			AddMenuItem(new MenuItem { Label = "Read from txt file by index", Task = SolveFromTXTAdapter });
 			AddMenuItem(new MenuItem { Label = "Back", Task = () => { Console.WriteLine(); } });
-		}
-	}
-
-	public class ServerMenuInit : MenuTasks
-	{
-		public ServerMenuInit(string menuLabel, Polynomial service) : base(menuLabel, service) => Init();
-
-		private void Init()
-		{
-			AddMenuItem(new MenuItem { Label = "Send request to Wolfram|Alfa", Task = SolveFromCLIAdapter });
-			AddMenuItem(new MenuItem { Label = "Exit", Task = () => { Console.WriteLine(); } });
 		}
 	}
 }

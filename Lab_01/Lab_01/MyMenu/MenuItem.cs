@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab_01.MyMenu
+namespace PolynomialSolver.MyMenu
 {
 	public class MenuItem
 	{

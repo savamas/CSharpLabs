@@ -42,28 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Readers\BaseReader.cs" />
-    <Compile Include="MyInterfaces\IIOService.cs" />
-    <Compile Include="MyInterfaces\IPolynomialParser.cs" />
     <Compile Include="MyMenu\MenuInit.cs" />
-    <Compile Include="Readers\ConsolePolynomialReader.cs" />
     <Compile Include="Introduction.cs" />
-    <Compile Include="MyInterfaces\IPolynomialFormer.cs" />
-    <Compile Include="MyInterfaces\IPolynomialReader.cs" />
     <Compile Include="MyMenu\Menu.cs" />
     <Compile Include="MyMenu\MenuItem.cs" />
-    <Compile Include="Polynomial.cs" />
-    <Compile Include="PolynomialImplementation.cs" />
-    <Compile Include="PolynomialItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PolynomialStringFormer.cs" />
-    <Compile Include="Readers\TxtPolynomialReader.cs" />
-    <Compile Include="PolynomialStringParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PolynomialLib\PolynomialLib.csproj">
+      <Project>{d45d6ffa-12a3-4c1e-a369-948eeda105c4}</Project>
+      <Name>PolynomialLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59E2EF82-4F5C-4DDA-8963-DA94E793197A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PolynomialSolverClient</RootNamespace>
-    <AssemblyName>PolynomialSolverClient</AssemblyName>
+    <ProjectGuid>{D45D6FFA-12A3-4C1E-A369-948EEDA105C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PolynomialLib</RootNamespace>
+    <AssemblyName>PolynomialLib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,21 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="MyInterfaces\IPolynomialFormer.cs" />
+    <Compile Include="MyInterfaces\IPolynomialParser.cs" />
+    <Compile Include="MyInterfaces\IPolynomialReader.cs" />
+    <Compile Include="MyReaders\BaseReader.cs" />
+    <Compile Include="MyReaders\ConsolePolynomialReader.cs" />
+    <Compile Include="MyReaders\TxtPolynomialReader.cs" />
+    <Compile Include="Polynomial.cs" />
+    <Compile Include="PolynomialImplementation.cs" />
+    <Compile Include="PolynomialItem.cs" />
+    <Compile Include="PolynomialStringFormer.cs" />
+    <Compile Include="PolynomialStringParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lab_01\PolynomialSolver.csproj">
-      <Project>{c4b22238-2559-4c12-9efe-08ef432e5f1d}</Project>
-      <Name>PolynomialSolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PolynomialLib\PolynomialLib.csproj">
-      <Project>{d45d6ffa-12a3-4c1e-a369-948eeda105c4}</Project>
-      <Name>PolynomialLib</Name>
-    </ProjectReference>
+    <Compile Include="TCPServices\BaseService.cs" />
+    <Compile Include="TCPServices\ClientService.cs" />
+    <Compile Include="TCPServices\ServerService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

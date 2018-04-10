@@ -1,6 +1,7 @@
-﻿using Lab_01.MyMenu;
+﻿using PolynomialLib;
+using PolynomialSolver.MyMenu;
 
-namespace Lab_01
+namespace PolynomialSolver
 {
 	public class Program
 	{

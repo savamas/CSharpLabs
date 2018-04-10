@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Lab_01
+namespace PolynomialSolver
 {
 	public class Introduction
 	{

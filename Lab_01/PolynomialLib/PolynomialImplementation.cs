@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab_01
+namespace PolynomialLib
 {
 	public partial class Polynomial
 	{

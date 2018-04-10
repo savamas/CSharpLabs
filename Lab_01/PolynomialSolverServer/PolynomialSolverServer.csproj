@@ -50,13 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lab_01\PolynomialSolver.csproj">
-      <Project>{c4b22238-2559-4c12-9efe-08ef432e5f1d}</Project>
-      <Name>PolynomialSolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PolynomialSolverClient\PolynomialSolverClient.csproj">
-      <Project>{59e2ef82-4f5c-4dda-8963-da94e793197a}</Project>
-      <Name>PolynomialSolverClient</Name>
+    <ProjectReference Include="..\PolynomialLib\PolynomialLib.csproj">
+      <Project>{d45d6ffa-12a3-4c1e-a369-948eeda105c4}</Project>
+      <Name>PolynomialLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

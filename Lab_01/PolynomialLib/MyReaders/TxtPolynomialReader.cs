@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Lab_01.MyInterfaces;
+using PolynomialLib.MyInterfaces;
 
-namespace Lab_01.Readers
+namespace PolynomialLib.MyReaders
 {
 	public class TxtPolynomialReader : BaseReader
 	{

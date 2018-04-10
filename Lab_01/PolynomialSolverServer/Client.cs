@@ -1,5 +1,5 @@
 ﻿using System;
-using PolynomialSolverClient.TCPServices;
+using PolynomialLib.TCPServices;
 
 namespace PolynomialSolverServer
 {
@@ -7,9 +7,15 @@ namespace PolynomialSolverServer
 	{
 		private BaseService service;
 		private string clientName;
+
 		private bool clientFirstRequest;
 
-		public Client(ServerService service)
+		public delegate void ConnectionEventHandler(string clientName);
+
+		public event ConnectionEventHandler ClientConnected;
+		public event ConnectionEventHandler ClientDisconnected;
+
+		public Client(BaseService service)
 		{
 			this.service = service;
 			clientFirstRequest = true;
@@ -30,7 +36,7 @@ namespace PolynomialSolverServer
 					if (clientFirstRequest)
 					{
 						clientName = clientRequest.Substring(0, clientRequest.IndexOf(':'));
-						Console.WriteLine("\n" + clientName + " connected\n");
+						ClientConnected?.Invoke(clientName);
 						clientFirstRequest = false;
 					}
 
@@ -47,7 +53,7 @@ namespace PolynomialSolverServer
 			}
 			finally
 			{
-				Console.WriteLine("\n" + clientName + " disconnected\n");
+				ClientDisconnected(clientName);
 				service.Disconnect();
 			}
 		}

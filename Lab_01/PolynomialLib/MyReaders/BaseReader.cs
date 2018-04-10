@@ -1,7 +1,7 @@
 ﻿using System;
-using Lab_01.MyInterfaces;
+using PolynomialLib.MyInterfaces;
 
-namespace Lab_01
+namespace PolynomialLib.MyReaders
 {
 	public abstract class BaseReader : IPolynomialReader
 	{

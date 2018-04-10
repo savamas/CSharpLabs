@@ -1,4 +1,4 @@
-﻿namespace Lab_01.MyInterfaces
+﻿namespace PolynomialLib.MyInterfaces
 {
 	public interface IPolynomialFormer<T>
 	{

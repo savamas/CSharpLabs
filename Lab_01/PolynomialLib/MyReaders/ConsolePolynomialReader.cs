@@ -1,6 +1,6 @@
 ﻿using static System.Console;
 
-namespace Lab_01.Readers
+namespace PolynomialLib.MyReaders
 {
     public class ConsolePolynomialReader : BaseReader
 	{

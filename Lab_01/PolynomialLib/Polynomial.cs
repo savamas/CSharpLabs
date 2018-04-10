@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using Lab_01.MyInterfaces;
+using PolynomialLib.MyInterfaces;
 
-namespace Lab_01
+namespace PolynomialLib
 {
 	public partial class Polynomial
 	{

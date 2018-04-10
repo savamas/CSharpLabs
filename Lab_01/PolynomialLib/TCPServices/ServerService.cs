@@ -1,7 +1,6 @@
 ﻿using System.Net.Sockets;
-using Lab_01;
 
-namespace PolynomialSolverClient.TCPServices
+namespace PolynomialLib.TCPServices
 {
 	public class ServerService : BaseService
 	{
